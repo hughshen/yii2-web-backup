@@ -1,0 +1,100 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: ${NGINX_NAME}
+    restart: always
+    volumes:
+      # www
+      - ./www/:/var/www/html/
+      # configs
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      # logs
+      - ./nginx/logs:/var/log/nginx/
+      # https
+      - ./nginx/certs/ssl/:/var/www/ssl/
+      - ./nginx/certs/challenges/:/var/www/challenge/
+    ports:
+      - "${NGINX_HTTP_PORT}:80"
+      - "${NGINX_HTTPS_PORT}:443"
+    environment:
+      - TZ=${MY_TZ}
+    links:
+      - "php:php-fpm"
+    networks:
+      - frontend
+
+  php:
+    build: .
+    container_name: ${PHP_NAME}
+    restart: always
+    working_dir: /var/www/html/
+    volumes:
+      - ./www/:/var/www/html/
+      - ./php/php.ini:/etc/php7/php.ini
+      - ./php/php-fpm.conf:/etc/php7/php-fpm.conf
+    environment:
+      - TZ=${MY_TZ}
+      - DBDRIVE_LINK=${DBDRIVE_LINK}
+      - DBDRIVE_USER=${DBDRIVE_USER}
+      - DBDRIVE_DB=${DBDRIVE_DB}
+      - DBDRIVE_PASS=${DBDRIVE_PASS}
+      - BACKEND_SYMLINK=${BACKEND_SYMLINK}
+    links:
+      - "mysql:${DBDRIVE_LINK}"
+      - "redis:redis"
+      - "es:es"
+    networks:
+      - backend
+      - frontend
+
+  mysql:
+    image: mysql:5.7
+    container_name: ${DBDRIVE_NAME}
+    restart: always
+    environment:
+      - TZ=${MY_TZ}
+      - MYSQL_USER=${DBDRIVE_USER}
+      - MYSQL_DATABASE=${DBDRIVE_DB}
+      - MYSQL_PASSWORD=${DBDRIVE_PASS}
+      - MYSQL_ROOT_PASSWORD=${DBDRIVE_ROOT_PASS}
+    command: ['mysqld', '--character-set-server=utf8']
+    networks:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${DBDRIVE_ADMIN}
+    restart: "no"
+    links:
+      - "mysql:db"
+    ports:
+      - "8080:80"
+    networks:
+      - backend
+
+  redis:
+    image: redis:latest
+    container_name: ${REDIS_NAME}
+    restart: always
+    environment:
+      - TZ=${MY_TZ}
+    networks:
+      - backend
+
+  es:
+    build:
+      context: .
+      dockerfile: Dockerfile-es
+    container_name: ${ES_NAME}
+    restart: always
+    environment:
+      - TZ=${MY_TZ}
+      - ES_JAVA_OPTS=${ES_JAVA_OPTS}
+    networks:
+      - backend
+
+networks:
+  backend:
+  frontend:

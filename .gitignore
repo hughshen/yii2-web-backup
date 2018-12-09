@@ -1,0 +1,7 @@
+# docker test
+.env
+*.bak
+*.sql
+nginx/conf.d/*.conf
+www/.composer
+www/frontend/web/backend

@@ -1,0 +1,34 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name main_server_name;
+
+    charset utf-8;
+    server_tokens off;
+
+    root /var/www/html/frontend/web;
+    index index.html index.php;
+
+    # SSL challenge
+    location ^~ /.well-known/acme-challenge/ {
+        alias /var/www/challenge/;
+        try_files $uri =404;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    location ~ \.php$ {
+        fastcgi_pass   php-fpm:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+server {
+    listen 80 default;
+    listen [::]:80 default;
+    return 444;
+}

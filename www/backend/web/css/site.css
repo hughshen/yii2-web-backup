@@ -1,0 +1,255 @@
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view td {
+    white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.nav li > form > button.logout {
+    padding: 15px;
+    border: none;
+}
+
+@media(max-width:767px) {
+    .nav li > form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+.nav > li > form > button.logout:focus,
+.nav > li > form > button.logout:hover {
+    text-decoration: none;
+}
+
+.nav > li > form > button.logout:focus {
+    outline: none;
+}
+
+/* Add */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+.tab-content {
+    padding-top: 10px;
+}
+
+/*Single form page*/
+
+.single-form-page {
+    min-height: 100%;
+    background-color: #f5f7fb;
+    padding: 1em;
+    /*Flex*/
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    align-items: center;
+    -ms-flex-align: center;
+}
+
+.single-form-wrap {
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 2em;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    position: relative;
+    margin-bottom: 1.5em;
+    width: 100%;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 40, 100, 0.12);
+    border-radius: 3px;
+}
+
+.single-form-wrap .single-form-title {
+    font-size: 1.125em;
+    margin-top: 0;
+    margin-bottom: 1.125em;
+    font-weight: 400;
+}
+
+.single-form-wrap .form-group {
+    margin-bottom: 1em;
+}
+
+.single-form-wrap .form-group .form-control {
+    height: auto;
+    padding: 0.5em 0.75em;
+    font-size: 0.9375em;
+    line-height: 1.6;
+    border-radius: 3px;
+}
+
+.single-form-wrap .form-group .help-block {
+    display: block;
+    margin: .375em 0;
+    font-size: 0.875em;
+}
+
+.single-form-wrap .form-group img {
+    max-width: 80px;
+    padding-bottom: 1px;
+}
+
+.single-form-wrap .form-group .control-label {
+    margin-bottom: .375em;
+    font-weight: 600;
+    font-size: 0.875em;
+}
+
+.single-form-wrap .form-group-footer {
+    margin: 0;
+}
+
+.single-form-wrap .btn-submit {
+    color: #fff;
+    background-color: #467fcf;
+    border-color: #467fcf;
+    display: block;
+    font-weight: 600;
+    width: 100%;
+    border-radius: 3px;
+    padding: 0.5em 0.75em;
+    font-size: 0.8125em;
+    line-height: 1.84615385;
+}
+
+/*Single form page end*/
+
+/*Media*/
+
+.media-item {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.media-item .thumbnail {
+    margin: 0;
+    position: relative;
+    height: 110px;
+}
+
+.media-item .thumbnail img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.media-item .caption {
+    color: #333;
+    background: #f7f7f7;
+    padding: 9px;
+    border-radius: 4px;
+}
+
+.media-item .caption .name {
+    padding-right: 3px;
+    display: inline-block;
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+/*Media end*/
